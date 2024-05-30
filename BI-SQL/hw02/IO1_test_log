@@ -1,0 +1,46 @@
+KRCHDAVI> BEGIN
+              EXECUTE IMMEDIATE 'DELETE FROM "CLEN"';
+              EXECUTE IMMEDIATE 'DELETE FROM "OBCHODNIK"';
+              EXECUTE IMMEDIATE 'DELETE FROM "ZAKAZNIK"';
+              EXECUTE IMMEDIATE 'DELETE FROM "OBCHOD"';
+              EXECUTE IMMEDIATE 'DELETE FROM "TERORISTICKA_ORGANIZACE"';
+
+              EXECUTE IMMEDIATE 'ALTER SEQUENCE "CLEN_SEQ" RESTART start with 1';
+              EXECUTE IMMEDIATE 'ALTER SEQUENCE "OBCHOD_SEQ" RESTART start with 1';
+              EXECUTE IMMEDIATE 'ALTER SEQUENCE "ZAKAZNIK_SEQ" RESTART start with 1';
+          END;
+[2024-03-21 15:58:11] completed in 21 ms
+
+KRCHDAVI> commit
+[2024-03-21 15:58:11] completed in 8 ms
+
+KRCHDAVI> INSERT INTO ZAKAZNIK VALUES ('Zakaznik_bez_obchodu', default, 'placeholder')
+[2024-03-21 15:58:11] 1 row affected in 9 ms
+
+KRCHDAVI> INSERT INTO TERORISTICKA_ORGANIZACE VALUES (1, 'Zakaznik_bez_obchodu', 1, 'placeholder')
+[2024-03-21 15:58:11] [72000][20502]
+[2024-03-21 15:58:11] 	ORA-20502: Zakaznik nema zaznamenany obchod
+[2024-03-21 15:58:11] 	ORA-06512: na "KRCHDAVI.TER_ORG_EXISTUJE_OBCHOD", line 10
+[2024-03-21 15:58:11] 	ORA-04088: chyba během provádění triggeru 'KRCHDAVI.TER_ORG_EXISTUJE_OBCHOD'
+[2024-03-21 15:58:11] Position: 12
+
+KRCHDAVI> commit
+[2024-03-21 15:58:13] completed in 8 ms
+
+KRCHDAVI> INSERT INTO ZAKAZNIK VALUES ('Zakaznik_s_obchodem', default, 'placeholder')
+[2024-03-21 15:58:13] 1 row affected in 9 ms
+
+KRCHDAVI> INSERT INTO CLEN VALUES (default, null, null, 'clen', 1, '?')
+[2024-03-21 15:58:13] 1 row affected in 5 ms
+
+KRCHDAVI> INSERT INTO OBCHODNIK VALUES (1, 'alias', 1)
+[2024-03-21 15:58:13] 1 row affected in 7 ms
+
+KRCHDAVI> INSERT INTO OBCHOD VALUES (default, 1, 2,'1.1.2000')
+[2024-03-21 15:58:13] 1 row affected in 7 ms
+
+KRCHDAVI> INSERT INTO TERORISTICKA_ORGANIZACE VALUES (2, 'Zakaznik_s_obchodem', 1, 'placeholder')
+[2024-03-21 15:58:13] 1 row affected in 6 ms
+
+KRCHDAVI> commit
+[2024-03-21 15:58:13] completed in 26 ms

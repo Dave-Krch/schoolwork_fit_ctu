@@ -1,0 +1,19 @@
+KRCHDAVI> INSERT INTO FILM_ZANR VALUES (4, 'TEST')
+[2024-04-04 14:49:15] [72000][20002]
+[2024-04-04 14:49:15] 	ORA-20002: Film 4 nemůže být přiřazen do více než 4 žánrů
+[2024-04-04 14:49:15] 	ORA-06512: na "KRCHDAVI.HLIDEJ_ZANR", line 10
+[2024-04-04 14:49:15] 	ORA-04088: chyba během provádění triggeru 'KRCHDAVI.HLIDEJ_ZANR'
+[2024-04-04 14:49:15] Position: 12
+
+KRCHDAVI> INSERT INTO FILM_ZANR VALUES (30, 'TEST')
+[2024-04-04 14:49:17] [72000][20002]
+[2024-04-04 14:49:17] 	ORA-20002: Film 30 nemůže být přiřazen do více než 4 žánrů
+[2024-04-04 14:49:17] 	ORA-06512: na "KRCHDAVI.HLIDEJ_ZANR", line 10
+[2024-04-04 14:49:17] 	ORA-04088: chyba během provádění triggeru 'KRCHDAVI.HLIDEJ_ZANR'
+[2024-04-04 14:49:17] Position: 12
+
+KRCHDAVI> INSERT INTO FILM_ZANR VALUES (1, 'KOM')
+[2024-04-04 14:49:17] 1 row affected in 7 ms
+
+KRCHDAVI> commit
+[2024-04-04 14:49:18] completed in 8 ms

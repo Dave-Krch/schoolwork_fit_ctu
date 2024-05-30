@@ -1,0 +1,42 @@
+KRCHDAVI> BEGIN
+              PREDCI('Iason', 'muzska');
+              PREDCI('Iason', 'zenska');
+              PREDCI('Iason', 'obe');
+              PREDCI('Zoran', 'obe');
+              PREDCI('Celestyn', 'obe');
+          end;
+[2024-04-11 14:49:56] [72000][20002]
+[2024-04-11 14:49:56] 	ORA-20002: Vydra 'Celestyn' neexistuje
+[2024-04-11 14:49:56] 	ORA-06512: na "KRCHDAVI.PREDCI", line 34
+[2024-04-11 14:49:56] 	ORA-06512: na line 6
+[2024-04-11 14:49:56] Position: 0
+----- Rodokmen vydry Iason, typ: muzska -----
+  -Iason, generace: 0, pohlavi: M
+    -Ringo, generace: 1, pohlavi: M
+      -Nestor, generace: 2, pohlavi: M
+----- Rodokmen vydry Iason, typ: zenska -----
+  -Iason, generace: 0, pohlavi: M
+    -Lilien, generace: 1, pohlavi: Z
+      -Malvina, generace: 2, pohlavi: Z
+----- Rodokmen vydry Iason, typ: obe -----
+  -Iason, generace: 0, pohlavi: M
+    -Lilien, generace: 1, pohlavi: Z
+    -Ringo, generace: 1, pohlavi: M
+      -Malvina, generace: 2, pohlavi: Z
+      -Nestor, generace: 2, pohlavi: M
+      -Nestor, generace: 2, pohlavi: M
+      -Jarmila, generace: 2, pohlavi: Z
+----- Rodokmen vydry Zoran, typ: obe -----
+  -Zoran, generace: 0, pohlavi: M
+
+KRCHDAVI> begin
+              PREDCI('Zoran', 'asdasdf');
+          end;
+[2024-04-11 14:49:58] [72000][20001]
+[2024-04-11 14:49:58] 	ORA-20001: Spatny parametr! Mozne parametry: 'muzska', 'zenska', 'obe'
+[2024-04-11 14:49:58] 	ORA-06512: na "KRCHDAVI.PREDCI", line 27
+[2024-04-11 14:49:58] 	ORA-06512: na line 2
+[2024-04-11 14:49:58] Position: 0
+
+KRCHDAVI> commit
+[2024-04-11 14:49:58] completed in 100 ms

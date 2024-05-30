@@ -1,0 +1,35 @@
+.button {
+    /*Color*/
+    -fx-background-color: #CCCCCC;
+
+    /*Sharp corners*/
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+
+    /*Button size*/
+    -fx-min-width: 280px;
+    -fx-min-height: 45px;
+    -fx-max-width: 280px;
+    -fx-max-height: 45px;
+
+    /*Text*/
+    -fx-font-family: Monospaced, courier new;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #AAAAAA;
+}
+
+#border_pane{
+    -fx-background-image: url("background.jpg") ;
+    -fx-background-repeat: no-repeat ;
+    -fx-background-size:  stretch ;
+}
+
+#logo_img{
+    -fx-min-width: 599px;
+    -fx-max-width: 373px;
+}

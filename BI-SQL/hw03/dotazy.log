@@ -1,0 +1,43 @@
+KRCHDAVI> SELECT rodic.jmeno
+          FROM VYDRA dite INNER JOIN VYDRA rodic ON (dite.OTEC = rodic.CV)
+          WHERE dite.JMENO = 'Merilin'
+[2024-04-10 22:29:17] 1 row retrieved starting from 1 in 70 ms (execution: 10 ms, fetching: 60 ms)
+
+KRCHDAVI> WITH
+              Rodice(generace, cv, jmeno, otec, matka, pohlavi) AS (
+                  SELECT 0, cv, jmeno, otec, matka, pohlavi
+                  FROM vydra v1
+                  WHERE cv = 10
+                  UNION ALL
+                  SELECT r.generace + 1,  v2.cv, v2.jmeno, v2.otec, v2.matka, v2.pohlavi
+                  FROM vydra v2, Rodice r
+                  WHERE r.otec = v2.CV or r.matka = v2.CV
+                  )
+          SELECT * FROM Rodice
+[2024-04-10 22:29:17] 7 rows retrieved starting from 1 in 51 ms (execution: 9 ms, fetching: 42 ms)
+
+KRCHDAVI> WITH
+              Rodice(generace, cv, jmeno, otec, matka, pohlavi) AS (
+                  SELECT 0, cv, jmeno, otec, matka, pohlavi
+                  FROM vydra v1
+                  WHERE cv = 10
+                  UNION ALL
+                  SELECT r.generace + 1,  v2.cv, v2.jmeno, v2.otec, v2.matka, v2.pohlavi
+                  FROM vydra v2, Rodice r
+                  WHERE r.otec = v2.CV
+                  )
+          SELECT * FROM Rodice
+[2024-04-10 22:29:17] 3 rows retrieved starting from 1 in 52 ms (execution: 11 ms, fetching: 41 ms)
+
+KRCHDAVI> WITH
+              Rodice(generace, cv, jmeno, otec, matka, pohlavi) AS (
+                  SELECT 0, cv, jmeno, otec, matka, pohlavi
+                  FROM vydra v1
+                  WHERE cv = 10
+                  UNION ALL
+                  SELECT r.generace + 1,  v2.cv, v2.jmeno, v2.otec, v2.matka, v2.pohlavi
+                  FROM vydra v2, Rodice r
+                  WHERE r.matka = v2.CV
+                  )
+          SELECT * FROM Rodice
+[2024-04-10 22:29:17] 3 rows retrieved starting from 1 in 66 ms (execution: 7 ms, fetching: 59 ms)

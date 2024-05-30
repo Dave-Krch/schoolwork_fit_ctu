@@ -1,0 +1,6 @@
+begin
+    FILL_ZAKAZNIK(10);
+    FILL_OBCHODNIK(10);
+    FILL_OBCHOD(20);
+    COMMIT;
+end;

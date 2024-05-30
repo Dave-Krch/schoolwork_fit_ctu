@@ -1,0 +1,109 @@
+KRCHDAVI> BEGIN
+              EXECUTE IMMEDIATE 'DELETE FROM "CLEN"';
+              EXECUTE IMMEDIATE 'DELETE FROM "OBCHODNIK"';
+              EXECUTE IMMEDIATE 'DELETE FROM "VZTAH"';
+              EXECUTE IMMEDIATE 'DELETE FROM "BLIZKA_OSOBA"';
+              EXECUTE IMMEDIATE 'DELETE FROM "BYDLISTE"';
+
+              EXECUTE IMMEDIATE 'ALTER SEQUENCE "CLEN_SEQ" RESTART start with 1';
+              EXECUTE IMMEDIATE 'ALTER SEQUENCE "BLIZKA_OSOBA_SEQ" RESTART start with 1';
+              EXECUTE IMMEDIATE 'ALTER SEQUENCE "BYDLISTE_SEQ" RESTART start with 1';
+          END;
+[2024-03-28 15:41:14] completed in 14 ms
+
+KRCHDAVI> INSERT INTO BYDLISTE (id_bydliste, stat, mesto, ulice, cislo_domu) VALUES (default, 'placeholder', 'placeholder', 'placeholder', 0)
+[2024-03-28 15:41:14] 1 row affected in 6 ms
+
+KRCHDAVI> INSERT INTO CLEN (jmeno, vek) VALUES ('Clen s blizkymi osobami 1', 22)
+[2024-03-28 15:41:14] 1 row affected in 7 ms
+
+KRCHDAVI> INSERT INTO CLEN (jmeno, vek) VALUES ('Clen s blizkymi osobami 2', 11)
+[2024-03-28 15:41:14] 1 row affected in 6 ms
+
+KRCHDAVI> INSERT INTO CLEN (jmeno, vek) VALUES ('Clen bez blizkych osob', 99)
+[2024-03-28 15:41:15] 1 row affected in 6 ms
+
+KRCHDAVI> INSERT INTO BLIZKA_OSOBA VALUES (default, 1, 'placeholder', 99, '?')
+[2024-03-28 15:41:15] 1 row affected in 7 ms
+
+KRCHDAVI> INSERT INTO BLIZKA_OSOBA VALUES (default, 1, 'placeholder', 99, '?')
+[2024-03-28 15:41:15] 1 row affected in 6 ms
+
+KRCHDAVI> INSERT INTO VZTAH VALUES (1, 1, 'rodic')
+[2024-03-28 15:41:15] 1 row affected in 5 ms
+
+KRCHDAVI> INSERT INTO VZTAH VALUES (1, 2, 'rodic')
+[2024-03-28 15:41:15] 1 row affected in 6 ms
+
+KRCHDAVI> INSERT INTO VZTAH VALUES (2, 1, 'rodic')
+[2024-03-28 15:41:15] 1 row affected in 7 ms
+
+KRCHDAVI> INSERT INTO VZTAH VALUES (2, 2, 'rodic')
+[2024-03-28 15:41:15] 1 row affected in 5 ms
+
+KRCHDAVI> commit
+[2024-03-28 15:41:15] completed in 7 ms
+
+KRCHDAVI> BEGIN
+              -- Insert obchodnika s blizkymi osobami
+              "obchodnik_wrapper".INSERT_(1, 'alias 1', 1);
+          END;
+[2024-03-28 15:41:15] completed in 8 ms
+
+KRCHDAVI> BEGIN
+              -- Insert obchodnika bez blizkych osob
+              "obchodnik_wrapper".INSERT_(3, 'alias', 99);
+          END;
+[2024-03-28 15:41:15] [72000][20001]
+[2024-03-28 15:41:15] 	ORA-20001: Not enough relationships for insertion.
+[2024-03-28 15:41:15] 	ORA-06512: na "KRCHDAVI.obchodnik_wrapper", line 12
+[2024-03-28 15:41:15] 	ORA-06512: na line 3
+[2024-03-28 15:41:15] Position: 0
+
+KRCHDAVI> BEGIN
+             -- Dovolene updaty
+              "obchodnik_wrapper".UPDATE_(1, 'novy_alias_1', 1);
+
+             -- Zmena id na jineho clena se znamymi
+              "obchodnik_wrapper".UPDATE_ID(1,2);
+
+             -- Zmena id zpet
+              "obchodnik_wrapper".UPDATE_ALL(2, 1, 'dalsi_alias', 1);
+          END;
+[2024-03-28 15:41:17] completed in 12 ms
+
+KRCHDAVI> BEGIN
+             -- Nedovoleny update id
+              "obchodnik_wrapper".UPDATE_ID(1,3);
+          END;
+[2024-03-28 15:41:17] [72000][20001]
+[2024-03-28 15:41:17] 	ORA-20001: New id does not have relationships for update.
+[2024-03-28 15:41:17] 	ORA-06512: na "KRCHDAVI.obchodnik_wrapper", line 69
+[2024-03-28 15:41:17] 	ORA-06512: na line 3
+[2024-03-28 15:41:17] Position: 0
+
+KRCHDAVI> BEGIN
+             -- Nedovoleny update id
+              "obchodnik_wrapper".UPDATE_ALL(1, 3, 'dalsi_alias', 1);
+          END;
+[2024-03-28 15:41:17] [72000][20001]
+[2024-03-28 15:41:17] 	ORA-20001: New id does not have enough relationships for update.
+[2024-03-28 15:41:17] 	ORA-06512: na "KRCHDAVI.obchodnik_wrapper", line 97
+[2024-03-28 15:41:17] 	ORA-06512: na line 3
+[2024-03-28 15:41:17] Position: 0
+
+KRCHDAVI> BEGIN
+             -- Neexistujici obchodnik
+              "obchodnik_wrapper".UPDATE_ID(-1,-1);
+          END;
+[2024-03-28 15:41:17] [72000][20002]
+[2024-03-28 15:41:17] 	ORA-20002: Row with given old_id does not exist
+[2024-03-28 15:41:17] 	ORA-06512: na "KRCHDAVI.obchodnik_wrapper", line 60
+[2024-03-28 15:41:17] 	ORA-06512: na line 3
+[2024-03-28 15:41:17] Position: 0
+
+KRCHDAVI> BEGIN
+              -- Delete
+              "obchodnik_wrapper".DELETE_(1);
+          END;
+[2024-03-28 15:41:17] completed in 7 ms
