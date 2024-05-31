@@ -1,0 +1,2 @@
+# Exclude into language usage count
+openssl-3.0.11/** linguist-vendored
