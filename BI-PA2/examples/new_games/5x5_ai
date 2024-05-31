@@ -1,0 +1,202 @@
+{
+    "width": 9,
+    "height": 9,
+
+    "players": {
+        "player1": {
+                "name": "player1",
+                "type": "human",
+                "ai_moves": 3,
+                "x": 0,
+                "y": 0,
+                "income": {
+                        "wood": 0,
+                        "stone": 0,
+                        "iron": 0
+                  },
+                "resources": {
+                        "wood": 400,
+                        "stone": 4000,
+                        "iron": 0
+                  }
+
+        },
+        "player2": {
+                "name": "player2",
+                "type": "ai",
+                "ai_moves": 3,
+                "x": 0,
+                "y": 0,
+                "income": {
+                        "wood": 0,
+                        "stone": 0,
+                        "iron": 0
+                  },
+                "resources": {
+                        "wood": 300,
+                        "stone": 300,
+                        "iron": 0
+                  }
+        }
+    },
+
+    "player_on_move" : 0,
+
+    "building_templates": {
+                "0": {
+                    "active": true,
+                    "upgraded": false,
+                    "owner": null,
+                    "name": "wood_farm",
+                    "type": "farm",
+                    "texture": "#",
+                    "costs": {
+                        "stone": 100
+                    },
+                    "resource": "wood",
+                    "amount": 100,
+                    "x": -1,
+                    "y": -1
+                },
+                "1": {
+                    "active": true,
+                    "upgraded": false,
+                    "owner": null,
+                    "name": "stone_farm",
+                    "type": "farm",
+                    "texture": "@",
+                    "costs": {
+                        "wood": 100
+                    },
+                    "resource": "stone",
+                    "amount": 100,
+                    "x": -1,
+                    "y": -1
+                },
+
+              "2": {
+                  "active": true,
+                  "upgraded": false,
+                  "owner": null,
+                  "name": "mine",
+                  "type": "mine",
+                  "texture": "M",
+                  "costs": {
+                      "wood": 50,
+                      "stone": 50
+                      },
+                  "output_resources": {
+                      "stone": 200
+                      },
+                  "deposit": "stone",
+                  "input_amount": 100,
+                  "deposit_amount": -1,
+                  "x": -1,
+                  "y": -1
+              },
+              "3": {
+                    "active": true,
+                    "upgraded": false,
+                    "owner": null,
+                    "name": "factory",
+                    "type": "factory",
+                    "texture": "F",
+                    "costs": {
+                        "wood": 100,
+                        "stone": 100
+                        },
+                    "output_resources": {
+                        "iron": 200
+                        },
+                    "input_resources": {
+                        "wood": 100,
+                        "stone": 100
+                        },
+                    "x": -1,
+                    "y": -1
+                }
+        },
+    "deposits": {
+            "0": {
+                "resource": "stone",
+                "amount": 10000,
+                "texture": "S",
+                "positions": {
+                    "0": {
+                        "x": 2,
+                        "y": 3
+                    },
+                    "1": {
+                        "x": 4,
+                        "y": 4
+                    },
+                    "2": {
+                        "x": 1,
+                        "y": 2
+                    }
+                }
+            }
+        },
+    "actions": {
+            "0" : {
+                "name": "double_production",
+                "mult": 2,
+                "type": "upgrade",
+                 "costs": {
+                     "wood": 100,
+                     "stone": 100
+                 }
+            },
+            "1" : {
+                "name": "half_production",
+                "mult": 0.5,
+                "type": "upgrade",
+                 "costs": {
+                     "wood": 0,
+                     "stone": 0
+                 }
+            },
+            "2" : {
+                "name": "nuke",
+                "radius": 100,
+                "can_destroy_enemy": true,
+                "type": "destroy_building",
+                 "costs": {
+                     "wood": 0,
+                     "stone": 0
+                 }
+            },
+            "3" : {
+                "name": "destroy_own",
+                "radius": 0,
+                "can_destroy_enemy": false,
+                "type": "destroy_building",
+                 "costs": {
+                     "wood": 0,
+                     "stone": 0
+                 }
+            },
+            "4" : {
+                "name": "meteor",
+                "resource": "stone",
+                "amount": 1000,
+                "texture": "S",
+                "type": "cataclysmic_event",
+                 "costs": {
+                     "wood": 100,
+                     "stone": 100
+                 }
+            }
+        },
+        "board":{},
+        "endgame_scenarios": {
+            "round_counter": 0,
+            "max_rounds": 20,
+            "resource_win": {
+                "iron": 1000
+            },
+            "resource_loss": {
+
+            }
+        }
+}
