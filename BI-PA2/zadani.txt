@@ -1,0 +1,26 @@
+Implementuji tahovou hru mezi 2 hráči na 2D mapě, hráči můžou stavět budovy a provádět globální akce ovlivňující sebe/protivníka.
+Hraprobíhá tak, že hráč vybere pole a dostane nabídku akcí, které na něm může dělat (vybere prázdné pole -> může postavit farmu). Pokud nemůže/nechce provádět další akce ukončí svůj tah, přičtou se mu suroviny podle postavených budov a čeká znovu na svůj tah.
+Program běží v terminálu. Hráč ho ovládá textovými vstupy.
+
+Funkcionality:
+1)
+Bude možné hrát člověk proti člověku, nebo proti umělé inteligenci. Umělá inteligence si vypočítá hodnotu každého tahu a ten provede.
+2)
+Počet a druh surovin bude možné nastavit v konfiguračním souboru. Budou reprezentované stringy a ostatní části programu s nimy tak budou pracovat.
+3)
+Ve hře jsou implementovány tři typy budov.
+Farmy generují každé kolo dané množství jedné suroviny.
+Doly generují každé kolo dané množství jedné suroviny a musé být postavené na ložisku (deposit).
+Továrny každé kolo hráči ubírají a přidávají dané suroviny.
+4)
+Ve hře jsou implementovány akce aktivovat/deaktivovat budovu, vylepšení budovy, zničení budov v daném dosahu a kataklizmatická událost (zničí budovu a vytvoří ložisko).
+5)
+Hra může skončit pokud hráč dosáhne/klesne pod určitý počet surovin, nebo po daném počtu kol.
+6)
+Ze souboru se načtou suroviny, druhy budov, druhy akcí a mapa.
+Například u surovin se načte jejich jméno a reprezentace v terminálu, u farem jméno, surovina kterou generují, počet vygenerovaný za kolo a reprezentace v terminálu.
+7)
+Hra se bude ukládat vytvořením podobného souboru, ve kterém bude aktuální stav mapy a hráčů.
+
+Použití polymorfismu:
+Polymorfismus je použit u budov, akcí a ovládání hráčů.
